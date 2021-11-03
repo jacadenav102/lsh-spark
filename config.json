@@ -1,0 +1,81 @@
+{
+    "preparador": {
+        "archivos": [  
+
+
+        ],
+        "params": [
+            "zona1",
+            "zonar",
+            "zonax"
+        ]
+    },
+    "anotador": {
+        "sparky": {
+            "usar_sparky": true
+        },
+        "tareas": [
+
+            
+            
+            {
+                "nombre": "obtener_configuracion",
+                "kwargs": []
+            },
+
+
+            
+            {
+                "nombre": "ejecutar_proceso",
+                "kwargs": []
+            }
+        ]
+    },
+
+
+
+    "lsh_configuracion": {
+
+
+
+        "queries":{ 
+            
+            "train_table": "SELECT key_mv, producto, dispositivo, estado_mv, trx_mv, reintento_mv, trx_no_exitosas, vlr_trx_exi_mv, vlr_trx_no_exi_mv, vlr_trx_mv, HOUR(f_inicial) as hora, DAY(f_inicial) as dia, MONTH(f_inicial) as mes, YEAR(f_inicial) as anio,  t_mv_minutos, abandono_mv, trx_exitosas, oportunidad_mv FROM proceso_enmascarado.frc_base_modelo_train",
+            "predict_table": "SELECT key_mv, producto, dispositivo, estado_mv, trx_mv, reintento_mv, trx_no_exitosas, vlr_trx_exi_mv, vlr_trx_no_exi_mv, vlr_trx_mv, HOUR(f_inicial) as hora, DAY(f_inicial) as dia, MONTH(f_inicial) as mes, YEAR(f_inicial) as anio, t_mv_minutos, abandono_mv, trx_exitosas, oportunidad_mv FROM proceso_enmascarado.frc_base_modelo_train  WHERE estado_mv = 'Técnicamente Exitosa' LIMIT 10",
+            "anomalies_table": "SELECT key_mv, anomalies, probability, prediction FROM proceso_enmascarado.frc_resultado_anomalia_momento_train"
+        
+            },
+            "kind_inference": "automatic",
+            "column_id": "key_mv",
+            "vector_table": "proceso_enmascarado.frc_app_vector_threshold",
+            "number_neighbors": 50,
+            "maximun_distance": 0.05,
+            "top_compare": 5,
+            "model_path": "frc_app/LSH/proyection-model",
+            "transformation_path": "frc_app/LSH/transfomation-pipeline",
+            "approximity_result": "proceso_enmascarado.frc_proximity_results",
+            "not_anomaly_table": "proceso_enmascarado.frc_not_anomaly",
+            "dashboard_automatic_data": "proceso_enmascarado.frc_tabla_datos_tablero",
+            "anomaly_table": "proceso_enmascarado.frc_anomaly_table",
+            "automatic_comprable_table": "proceso_enmascarado.frc_tabla_comparacion",
+            "variables_tocompare": "key_mv, producto, dispositivo, estado_mv, trx_mv, reintento_mv, trx_no_exitosas, vlr_trx_exi_mv, vlr_trx_no_exi_mv, vlr_trx_mv, hora, dia, mes, anio, t_mv_minutos, abandono_mv, trx_exitosas, oportunidad_mv",
+            "neighnord_result": "proceso_enmascarado.frc_neighnord_results",
+            "automatic_result": "proceso_enmascarado.frc_automatic_result",
+            "number_hash_tables": 5,
+            "bucket_lenth": 2.0,
+            "sparkOptions": "--driver-memory 10g --num-executors 10 --executor-memory 20g",
+            "monitor_table": "proceso_enmascarado.frc_lshapp"
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+}
